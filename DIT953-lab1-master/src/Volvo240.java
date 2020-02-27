@@ -1,31 +1,47 @@
 import java.awt.*;
 
-public class Volvo240 extends car{
-    public final static double trimFactor = 1.25;
+/**
+ * Represents a Volvo 240.
+ * @author Yu Shin Hua
+ * @author Marja Rolandsson
+ * @author Simon Genne
+ */
+public class Volvo240 extends car implements ITruckTransportable{
+    private final static double trimFactor = 1.25;
 
+    /**
+     * Constructor of Volvo240 objects.
+     */
     public Volvo240(){
-       super(4,Color.black,100,"Volvo240");
-    }
-    
-    public double speedFactor(){
-        return enginePower * 0.01 * trimFactor;
+       super(4,Color.black,100,"Volvo240", 1000);
     }
 
-    public void incrementSpeed(double amount){
-	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+    /**
+     * @return the current speed factor of the car.
+     */
+    private double speedFactor(){
+        double sf = speedFactor(trimFactor);
+        System.out.println(sf);
+        return sf;
     }
 
-    public void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
-
-    // TODO fix this method according to lab pm
+    /**
+     * Increases the speed of the Volvo240 depending on the given amount and trimFactor of the car.
+     * The given amount can only be between 0 and 1.
+     * @param amount specifies the amount with which to increase speed.
+     */
+    @Override
     public void gas(double amount){
-        incrementSpeed(amount);
+        gas(speedFactor(), amount);
     }
 
-    // TODO fix this method according to lab pm
+    /**
+     * Increases the speed of the Volvo240 depending on the given amount and trimFactor of the car.
+     * The given amount can only be between 0 and 1.
+     * @param amount specifies the amount with which to decrease the speed.
+     */
+    @Override
     public void brake(double amount){
-        decrementSpeed(amount);
+        brake(speedFactor(), amount);
     }
 }
