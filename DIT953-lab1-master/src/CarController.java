@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,45 +13,80 @@ import java.util.List;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
+public class CarController extends JFrame{
 
-    //TODO:: ????
-    private CarModel model;
+    private CarModel cm;
+    private CarView cw;
 
-    public CarController(CarModel model) {
-        this.model = model;
+    public CarController(CarModel model, CarView view) {
+
+        this.cm = model;
+        this.cw = view;
+        initComponents();
+
     }
 
-    public void gas(int amount) {
-        model.gas(amount);
-    }
 
-    public void brake(int amount) {
-        model.brake(amount);
-    }
 
-    public void turboOn() {
-        model.turboOn();
-    }
+    private void initComponents() {
 
-    public void turboOff() {
-        model.turboOff();
-    }
+        // This actionListener is for the gas button only
+        cw.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.gas(cw.gasAmount);
+            }
+        });
 
-    public void liftBed() {
-        model.liftBed();
-    }
+        cw.brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.brake(cw.gasAmount);
+            }
+        });
 
-    public void lowerBed() {
-        model.lowerBed();
-    }
+        cw.turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.turboOn();
+            }
+        });
 
-    public void startAll() {
-        model.startAll();
-    }
+        cw.turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.turboOff();
+            }
+        });
 
-    public void stopAll() {
-        model.stopAll();
+        cw.liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.liftBed();
+            }
+        });
+
+        cw.lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.lowerBed();
+            }
+        });
+
+        cw.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.startAll();
+            }
+        });
+
+        cw.stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.stopAll();
+            }
+        });
+
     }
 
 

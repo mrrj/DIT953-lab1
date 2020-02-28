@@ -72,7 +72,6 @@ public class CarModel {
         double gas = ((double) amount) / 100;
         for (car c : cars) {
             c.gas(gas);
-            System.out.println(c.getCurrentSpeed());
         }
     }
 
